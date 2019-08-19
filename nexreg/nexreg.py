@@ -26,8 +26,8 @@ headers = {
 }
 thead = ['instrumentCode', 'quantity', 'searchTime', 'priceLevel', 'bidOfferStatus', 'price', 'priceNotation',
          'priceCurrency', 'venueExecution', 'publishTime']
-mongo_client = pymongo.MongoClient(host='localhost', port=27017)
-db = mongo_client['tradeWeb']
+mongo_client = pymongo.MongoClient(host=settings.MONGO_HOST, port=settings.MONGO_PORT)
+db = mongo_client[settings.MONGO_DB]
 
 start = datetime.datetime.now()
 time_delta = datetime.timedelta(hours=6)
