@@ -35,7 +35,9 @@ start = datetime.datetime.now()
 time_delta = datetime.timedelta(hours=6)
 end = start + time_delta
 
-now_point  =0
+now_point = 0
+
+
 def search_and_plot():
     plt.figure(1)
     global now_point
@@ -71,6 +73,7 @@ def search_and_plot():
             now_ = datetime.datetime.now()
         plt.savefig('figure-1.png')
 
+
 def search():
     global now_point
     with requests.session() as s:
@@ -100,12 +103,13 @@ def search():
             now_ = datetime.datetime.now()
         plt.savefig('figure-1.png')
 
+
 def search_all():
     page_index = 1
     with requests.session() as s:
         s.headers = headers
         while True:
-            url = url_.format(page_index,1000)
+            url = url_.format(page_index, 1000)
             r = s.get(url)
             if 'Access is temporarily' in r.text:
                 break
@@ -119,16 +123,16 @@ def search_all():
                 result = db['nexreg'].update_one(filter=doc, update={'$set': doc}, upsert=True)
                 if not result.matched_count:
                     update_count += 1
-            print(r.status_code,update_count)
-            page_index+=1
-
-
+            print(r.status_code, update_count)
+            page_index += 1
 
 
 def plot_():
-    l1 = [1,2,1]
-    l2 = [1,2,1]
-    plt.plot(l1,l2,'-r')
+    l1 = [1, 2, 1]
+    l2 = [1, 2, 1]
+    plt.plot(l1, l2, '-r')
     plt.pause(5)
+
+
 if __name__ == '__main__':
     search_all()
